@@ -1,1 +1,76 @@
-<p>check the console!</p>
+<div class="container">
+  <div class="button-container">
+    <button class="btn btn-primary" (click)="filterSearch()">
+      Search Patients with birth years 1960-65
+    </button>
+    <button class="btn btn-secondary" (click)="resetEntries()">
+      Reset Patients
+    </button>
+  </div>
+  <div class="input-container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div class="row">
+        <div class="col">
+          <div class="input-group">
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+              placeholder="First or Last name"
+              aria-label="Patient name first or last."
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <input
+              type="date"
+              formControlName="date"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.date.errors }"
+              placeholder="1990-01-21"
+              aria-label="Patient birth-date."
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-primary"
+                type="submit"
+                [disabled]="submitted"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <p>Click the Birthdate table header to sort by age.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Gender</th>
+        <th
+          scope="col"
+          (click)="sortYoungestToOldest()"
+          style="cursor: pointer"
+        >
+          Birthdate
+        </th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="filteredEntries">
+      <tr *ngFor="let item of filteredEntries; index as i" appHighligh>
+        <th scope="row">{{ i }}</th>
+        <td>{{ item.resource.gender }}</td>
+        <td>{{ item.resource.birthDate }}</td>
+        <td>{{ compileName(item.resource) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-footer [functionTimer]="functionTime"></app-footer>
