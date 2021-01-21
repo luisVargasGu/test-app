@@ -16,6 +16,16 @@ export class ApiService {
       { headers: this.getHeaders() });
   }
 
+  getPatientsAgeFilt(startYear: string = '1960', endYear: string = '1965') {
+    return this.httpClient.get(environment.queryURI + `/Patient?birthdate=ge${startYear}-01-01&birthdate=le${endYear}-12-31`,
+      { headers: this.getHeaders() });
+  }
+
+  customSearch(name: string, birthDate: Date) {
+    return this.httpClient.get(environment.queryURI + `/Patient?name=${name}&birthdate=eq${birthDate}`,
+      { headers: this.getHeaders() });
+  }
+
   private getHeaders(): HttpHeaders {
     const headers = new HttpHeaders({
       'Content-Type': 'application/fhir+json'
