@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { QuestionItem } from 'src/app/models/questionItem';
 
 @Component({
@@ -14,7 +14,12 @@ export class QuestionComponent {
 
   constructor() { }
 
-  f(control: string) {
+  /**
+   * Used for html template form validation
+   * @param  {string} control: name of the form control
+   * @returns ValidationErrors: null or error object
+   */
+  f(control: string): ValidationErrors {
     let controlArr = control.split(".");
     if (controlArr.length == 1) {
       let test = this.form.controls[controlArr[0]];
@@ -28,11 +33,19 @@ export class QuestionComponent {
     }
   }
 
+
+  /**
+   * used for form validation
+   */
   get isValid() {
     return this.form.valid;
   }
 
-
+  /**
+   * Sets the value of the radio button inputs
+   * @param  {string} value: string representation of the value 'false' or 'true'
+   * @param  {string} formName: name of the form control
+   */
   checkValue(value: string, formName: string) {
     let controlArr = formName.split('.');
     let test: AbstractControl;

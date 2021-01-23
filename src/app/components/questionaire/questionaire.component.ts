@@ -26,6 +26,9 @@ export class QuestionaireComponent implements OnInit {
     this.parseQuestionarire();
   }
 
+  /**
+   * Generates a response obj if the form is valid
+   */
   generateResponse() {
     this.submitted = true;
     if (this.form.invalid) {
@@ -63,6 +66,10 @@ export class QuestionaireComponent implements OnInit {
     this.payLoad = JSON.stringify(output);
   }
 
+  /**
+   * Sets questionare type items to something
+   * That an input component can interpret
+   */
   parseQuestionarire() {
     this.questionaire.item.forEach((question, i) => {
       if (question.type === "boolean") {

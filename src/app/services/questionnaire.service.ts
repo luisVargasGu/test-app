@@ -301,6 +301,12 @@ export class QuestionnaireService {
 
   constructor(private httpClient: HttpClient) { }
 
+
+  /**
+   * Turns the Questionnaire JSON file and Converts it into a 
+   * Workable Form
+   * @param  {QuestionItem[]} questions: The array of Question Items
+   */
   toFormGroup(questions: QuestionItem[]) {
     const group: any = {};
 
@@ -347,6 +353,10 @@ export class QuestionnaireService {
     return new FormGroup(group);
   }
 
+  /**
+   * Checks if the Input is boolean
+   * @returns ValidatorFn
+   */
   booleanValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       let forbidden = true;
@@ -357,6 +367,10 @@ export class QuestionnaireService {
     };
   }
 
+  /**
+   * Checks if the Input is a valid gender
+   * @returns ValidatorFn
+   */
   genderValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       let forbidden = true;
@@ -369,6 +383,10 @@ export class QuestionnaireService {
     };
   }
 
+  /**
+   * Checks if the Input is a valid Country, or Country code
+   * @returns ValidatorFn
+   */
   countryValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       let forbidden = true;
@@ -387,6 +405,10 @@ export class QuestionnaireService {
     };
   }
 
+  /**
+   * Checks if the Input is a valid marrital status
+   * @returns ValidatorFn
+   */
   marritalValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       let forbidden = true;
