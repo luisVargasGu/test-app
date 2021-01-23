@@ -1,0 +1,14 @@
+.container {
+  .button-container {
+    display: flex;
+    align-items: center;
+    margin: 12px;
+    justify-content: space-evenly;
+  }
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin: 12px;
+    justify-content: space-evenly;
+  }
+}
