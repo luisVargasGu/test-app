@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="center">
+    <form
+      class="form-horizontal"
+      (ngSubmit)="generateResponse()"
+      [formGroup]="form"
+    >
+      <div *ngFor="let question of questionaire.item" class="form-row">
+        <app-question
+          [submitted]="submitted"
+          [question]="question"
+          [form]="form"
+        ></app-question>
+      </div>
+      <div class="button-div">
+        <button class="btn btn-primary" type="submit">Send</button>
+      </div>
+    </form>
+
+    <div *ngIf="payLoad" class="card">
+      <h3 class="card-title" style="padding: 5px 10px">
+        Generated Form Response
+      </h3>
+      <div class="card-body">
+        {{ payLoad }}
+      </div>
+    </div>
+  </div>
+</div>
