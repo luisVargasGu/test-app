@@ -1,0 +1,103 @@
+<div [formGroup]="form">
+  <h2>{{ question.text }}</h2>
+  <div
+    *ngIf="submitted && f(question.linkId)"
+    class="invalid-feedback"
+    style="display: block"
+  >
+    Please select an answer
+  </div>
+  <div [ngSwitch]="question.type">
+    <div
+      *ngSwitchCase="'radio'"
+      style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
+    >
+      <label>
+        <input
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f(question.linkId) }"
+          [formControlName]="question.linkId"
+          (ngModelChange)="checkValue('false', question.linkId)"
+          [name]="question.linkId"
+          [type]="question.type"
+        />
+        Yes
+      </label>
+      <label>
+        <input
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f(question.linkId) }"
+          [formControlName]="question.linkId"
+          (ngModelChange)="checkValue('false', question.linkId)"
+          [name]="question.linkId"
+          [type]="question.type"
+        />
+        No
+      </label>
+    </div>
+
+    <div *ngSwitchCase="'group'" [formGroupName]="question.linkId">
+      <div *ngFor="let subQuestion of question?.item">
+        <h3>{{ subQuestion.text }}</h3>
+        <div
+          *ngIf="subQuestion.type == 'radio'"
+          style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
+        >
+          <div
+            *ngIf="submitted && f(question.linkId + '.' + subQuestion.linkId)"
+            class="invalid-feedback"
+            style="display: block"
+          >
+            Please select an answer
+          </div>
+          <label>
+            <input
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  submitted && f(question.linkId + '.' + subQuestion.linkId)
+              }"
+              [formControlName]="subQuestion.linkId"
+              (ngModelChange)="
+                checkValue('true', question.linkId + '.' + subQuestion.linkId)
+              "
+              [name]="subQuestion.linkId"
+              [type]="subQuestion.type"
+            />
+            Yes
+          </label>
+          <label>
+            <input
+              class="form-control"
+              [ngClass]="{
+                'is-invalid':
+                  submitted && f(question.linkId + '.' + subQuestion.linkId)
+              }"
+              [formControlName]="subQuestion.linkId"
+              (ngModelChange)="
+                checkValue('false', question.linkId + '.' + subQuestion.linkId)
+              "
+              [name]="subQuestion.linkId"
+              [type]="subQuestion.type"
+            />
+            No
+          </label>
+        </div>
+        <input
+          *ngIf="subQuestion.type != 'radio'"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              submitted && f(question.linkId + '.' + subQuestion.linkId)
+          }"
+          [formControlName]="subQuestion.linkId"
+          [type]="subQuestion.type"
+        />
+      </div>
+    </div>
+
+    <div class="invalid-feedback" *ngIf="!isValid">
+      {{ question.text }} is required
+    </div>
+  </div>
+</div>
