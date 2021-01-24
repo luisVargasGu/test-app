@@ -64,7 +64,7 @@
       </tr>
     </thead>
     <tbody *ngIf="filteredEntries">
-      <tr *ngFor="let item of filteredEntries; index as i" appHighligh>
+      <tr *ngFor="let item of filteredEntries; index as i" appHighlight>
         <th scope="row">{{ i }}</th>
         <td>{{ item.resource.gender }}</td>
         <td>{{ item.resource.birthDate }}</td>
