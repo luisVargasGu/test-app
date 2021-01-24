@@ -19,10 +19,11 @@ export class QuestionaireComponent implements OnInit {
   // form boolean
   submitted: boolean = false;
 
-  constructor(private questionnaireService: QuestionnaireService) { }
+  constructor(private questionnaireService: QuestionnaireService) {
+    this.form = this.questionnaireService.toFormGroup(this.questionaire.item);
+  }
 
   ngOnInit(): void {
-    this.form = this.questionnaireService.toFormGroup(this.questionaire.item);
     this.parseQuestionarire();
   }
 

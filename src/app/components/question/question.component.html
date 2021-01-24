@@ -1,4 +1,4 @@
-<div [formGroup]="form">
+<div *ngIf="question && form" [formGroup]="form">
   <h2>{{ question.text }}</h2>
   <div
     *ngIf="submitted && f(question.linkId)"
